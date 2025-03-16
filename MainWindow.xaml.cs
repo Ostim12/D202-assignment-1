@@ -10,7 +10,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 //my own namespaces
-using Sorting;
+using search;
+using Sort;
 using DataStructuers;
 
 namespace D202_assignment_1
