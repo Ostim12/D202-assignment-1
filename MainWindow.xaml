@@ -11,13 +11,19 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ListBox Name="MovieBox" Grid.Row="1"></ListBox>
 
-        <ListBox Name="MovieBox" BorderThickness="0, 20, 0 ,0 "></ListBox>
+        </Grid>
         
         <TabControl Grid.Column="1">
             <TabItem Header="load">
                 <Grid>
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="search">

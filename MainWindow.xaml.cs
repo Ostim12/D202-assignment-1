@@ -11,8 +11,9 @@ using System.Windows.Shapes;
 
 //my own namespaces
 using search;
-using Sort;
+using Sorting;
 using DataStructuers;
+using System.Diagnostics;
 
 namespace D202_assignment_1
 {
@@ -21,11 +22,26 @@ namespace D202_assignment_1
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            
+
         }
 
+        public T[] BubbleSort<T>(T[] values) where T : IComparable<T>
+        {
+            BubbleSort<T> sorter = new BubbleSort<T>();
+            return sorter.Sort(values); 
+        }
+
+        public T[] MergeSort<T>(T[] values) where T : IComparable<T>
+        {
+            MergeSort<T> sorter = new MergeSort<T>();
+            sorter.Sort(values);
+            return values;
+        }
     }
 
     public class Movie

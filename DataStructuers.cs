@@ -136,4 +136,9 @@ namespace DataStructuers
             return values[index];
         }
     }
+
+    class LinkList<T>
+    {
+
+    }
 }
