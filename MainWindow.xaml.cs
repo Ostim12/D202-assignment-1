@@ -22,7 +22,7 @@ namespace D202_assignment_1
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -47,13 +47,13 @@ namespace D202_assignment_1
     public class Movie
     {
         public string ID { get; set; }
-        public string Title { get; set; }
-        public string Director { get; set; }
-        public string Genre { get; set; }
-        public int ReleaseYear { get; set; }
-        public string Availability { get; set; }
+        public string? Title { get; set; }
+        public string? Director { get; set; }
+        public string? Genre { get; set; }
+        public int? ReleaseYear { get; set; }
+        public string? Availability { get; set; }
 
-        public Movie(string movieID, string movieTitle, string movieDirector, string movieGenre, int movieReleaseYear, string movieAvailability)
+        public Movie(string movieID, string? movieTitle, string? movieDirector, string? movieGenre, int? movieReleaseYear, string? movieAvailability)
         {
             ID = movieID;
             Title = movieTitle;
