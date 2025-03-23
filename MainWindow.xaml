@@ -21,17 +21,81 @@
         </Grid>
         
         <TabControl Grid.Column="1">
-            <TabItem Header="load">
+            <TabItem Header="Load">
                 <Grid>
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    
                 </Grid>
             </TabItem>
-            <TabItem Header="search">
+            <TabItem Header="Search">
                 <Grid>
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="SearchBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
+                    <Button Name="SearchButton" Grid.Row="1" Grid.Column="4" Click="SearchButton_Click">🔍</Button>
+                    <RadioButton Name="SearchRBTitle" Grid.Row="3" Grid.Column="1" GroupName="SerchType" IsChecked="True">By Title</RadioButton>
+                    <RadioButton Name="SearchRBID" Grid.Row="3" Grid.Column="2" GroupName="SerchType" >By Movie ID</RadioButton>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sort">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    
                 </Grid>
             </TabItem>
         </TabControl>
+
 
     </Grid>
 </Window>

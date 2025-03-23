@@ -42,6 +42,11 @@ namespace D202_assignment_1
             sorter.Sort(values);
             return values;
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class Movie

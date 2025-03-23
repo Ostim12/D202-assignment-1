@@ -59,7 +59,7 @@ namespace DataStructuers
         private T[] stack { get; set; }
         private int size { get; set; }
 
-        public IntStack(int capacity)
+        public Stack(int capacity)
         {
             stack = new T[capacity];
             size = 0;
