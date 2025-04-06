@@ -10,10 +10,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 //my own namespaces
+using MovieClasses;
+using LoadJson;
+using SaveJson;
 using search;
 using Sorting;
 using DataStructuers;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace D202_assignment_1
 {
@@ -22,12 +26,12 @@ namespace D202_assignment_1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MovieList LoadedMovies;
         
+
         public MainWindow()
         {
             InitializeComponent();
-            
-
         }
 
         public T[] BubbleSort<T>(T[] values) where T : IComparable<T>
@@ -43,30 +47,43 @@ namespace D202_assignment_1
             return values;
         }
 
+        public MovieList Load()
+        {
+            LoadJson.LoadJson Loader = new LoadJson.LoadJson();
+            return Loader.loadMovies();
+        }
+
+        public void Save(MovieList SaveList){
+            SaveJson.SaveJson Saver = new SaveJson.SaveJson();
+            Saver.Save(SaveList);
+        }
+
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
-    }
 
-    public class Movie
-    {
-        public string ID { get; set; }
-        public string? Title { get; set; }
-        public string? Director { get; set; }
-        public string? Genre { get; set; }
-        public int? ReleaseYear { get; set; }
-        public string? Availability { get; set; }
-
-        public Movie(string movieID, string? movieTitle, string? movieDirector, string? movieGenre, int? movieReleaseYear, string? movieAvailability)
+        private void LoadFileBtn_Click(object sender, RoutedEventArgs e)
         {
-            ID = movieID;
-            Title = movieTitle;
-            Director = movieDirector;
-            Genre = movieGenre;
-            ReleaseYear = movieReleaseYear;
-            Availability = movieAvailability;
+            try
+            {
+                LoadedMovies = Load();
+
+                if (LoadedMovies != null)
+                {
+                        MovieBox.DataContext = LoadedMovies.Movies;
+                    
+                }
+            }
+            catch (Exception)
+            {
+                Debug.Print("load window closed");
+            }
         }
 
+        private void SaveFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Save(LoadedMovies);
+        }
     }
 }
