@@ -16,12 +16,12 @@
                 <RowDefinition Height="22"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListBox Name="MovieBox" Grid.Row="1"></ListBox>
-
+            <DataGrid Name="MovieBox" Grid.Row="1" AutoGenerateColumns="True" ItemsSource="{Binding}">
+                
+            </DataGrid>
         </Grid>
-        
         <TabControl Grid.Column="1">
-            <TabItem Header="Load">
+            <TabItem Header="Load/save">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -41,7 +41,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="20"/>
                     </Grid.ColumnDefinitions>
-                    
+                    <Button Name="LoadFileBtn" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Click="LoadFileBtn_Click" >Load File</Button>
+                    <Button Name="SaveFileBtn" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Click="SaveFileBtn_Click" >Save File</Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Search">

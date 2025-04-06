@@ -18,6 +18,7 @@ namespace search
         }
 
     }
+
     public class BinarySearch<T> where T : IComparable<T>
     {
         public static int Search(T[] arr, T key)

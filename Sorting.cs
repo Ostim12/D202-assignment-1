@@ -41,6 +41,7 @@ namespace Sorting
             values[j] = temp;
         }
     }
+
     public class MergeSort<T> where T : IComparable<T>
     {
         public MergeSort() { }
