@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D202_assignment_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid Name="root" Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -43,6 +43,59 @@
                     </Grid.ColumnDefinitions>
                     <Button Name="LoadFileBtn" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Click="LoadFileBtn_Click" >Load File</Button>
                     <Button Name="SaveFileBtn" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Click="SaveFileBtn_Click" >Save File</Button>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Add/Edit">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="1" Grid.Row="1" TextAlignment="Right" >Movie ID:</TextBlock>
+                    <TextBox Name="InputMovieID" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1"/>
+                    
+                    <TextBlock Grid.Column="1" Grid.Row="3" TextAlignment="Right" >Movie Title:</TextBlock>
+                    <TextBox Name="InputMovieTitle" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3"/>
+                    
+                    <TextBlock Grid.Column="1" Grid.Row="5" TextAlignment="Right" >Movie Director:</TextBlock>
+                    <TextBox Name="InputMovieDirector" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="5"/>
+                    
+                    <TextBlock Grid.Column="1" Grid.Row="7" TextAlignment="Right" >Movie Genre:</TextBlock>
+                    <TextBox Name="InputMovieGenre" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="7"/>
+                    
+                    <TextBlock Grid.Column="1" Grid.Row="9" TextAlignment="Right" >Movie Release Year:</TextBlock>
+                    <TextBox Name="InputMovieReleaseYear" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="9"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="11" TextAlignment="Right" >Movie Availability:</TextBlock>
+                    <CheckBox Name="InputMovieAvailability" Grid.Column="2" Grid.Row="11"/>
+
+                    <Button Name="BTNAddMovie"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="13">Add Movie</Button>
+                    <Button Name="BTNEditMovie" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="13" IsEnabled="False">Edit Movie</Button>
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="Search">
