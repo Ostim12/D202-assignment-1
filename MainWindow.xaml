@@ -74,24 +74,24 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="20"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock Grid.Column="1" Grid.Row="1" TextAlignment="Right" >Movie ID:</TextBlock>
-                    <TextBox Name="InputMovieID" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1"/>
-                    
-                    <TextBlock Grid.Column="1" Grid.Row="3" TextAlignment="Right" >Movie Title:</TextBlock>
-                    <TextBox Name="InputMovieTitle" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3"/>
-                    
-                    <TextBlock Grid.Column="1" Grid.Row="5" TextAlignment="Right" >Movie Director:</TextBlock>
-                    <TextBox Name="InputMovieDirector" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="5"/>
-                    
-                    <TextBlock Grid.Column="1" Grid.Row="7" TextAlignment="Right" >Movie Genre:</TextBlock>
-                    <TextBox Name="InputMovieGenre" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="7"/>
-                    
-                    <TextBlock Grid.Column="1" Grid.Row="9" TextAlignment="Right" >Movie Release Year:</TextBlock>
-                    <TextBox Name="InputMovieReleaseYear" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="9"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="11" TextAlignment="Right" >Movie Availability:</TextBlock>
-                    <CheckBox Name="InputMovieAvailability" Grid.Column="2" Grid.Row="11"/>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" TextAlignment="Right" >Movie ID:</TextBlock>
+                    <TextBox Name="InputMovieID" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1"/>
+
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" TextAlignment="Right" >Movie Title:</TextBlock>
+                    <TextBox Name="InputMovieTitle" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3"/>
+
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" TextAlignment="Right" >Movie Director:</TextBlock>
+                    <TextBox Name="InputMovieDirector" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="5"/>
+
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" TextAlignment="Right" >Movie Genre:</TextBlock>
+                    <TextBox Name="InputMovieGenre" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="7"/>
+                    
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" TextAlignment="Right" >Movie Release Year:</TextBlock>
+                    <TextBox Name="InputMovieReleaseYear" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="9"/>
+
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="11" TextAlignment="Right" >Movie Availability:</TextBlock>
+                    <CheckBox Name="InputMovieAvailability" Grid.Column="3" Grid.Row="11"/>
 
                     <Button Name="BTNAddMovie"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="13">Add Movie</Button>
                     <Button Name="BTNEditMovie" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="13" IsEnabled="False">Edit Movie</Button>
