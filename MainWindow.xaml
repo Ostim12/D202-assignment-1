@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D202_assignment_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinHeight="450" MinWidth="800">
+        Title="MainWindow" Height="450" Width="1025" MinHeight="450" MinWidth="800">
     <Grid Name="root" Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,9 +16,25 @@
                 <RowDefinition Height="22"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid Name="MovieBox" Grid.Row="1" AutoGenerateColumns="True" ItemsSource="{Binding}">
-                
-            </DataGrid>
+            <ListView Name="MovieBox" Grid.Row="1" ItemsSource="{Binding Movies}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ID}" Header="ID" Width="100"/>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Title" Width="100"/>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Director}" Header="Director" Width="100"/>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Genre}" Header="Genre" Width="100"/>
+                        
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ReleaseYear}" Header="Release Year" Width="100"/>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Availability}" Header="Availability" Width="100"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
         <TabControl Grid.Column="1">
             <TabItem Header="Load/save">
@@ -98,6 +114,7 @@
                     
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Search">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -125,6 +142,7 @@
                     
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Sort">
                 <Grid>
                     <Grid.RowDefinitions>

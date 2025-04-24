@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 //my own namespaces
 using MovieClasses;
@@ -16,16 +18,17 @@ using SaveJson;
 using search;
 using Sorting;
 using DataStructuers;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
 
 namespace D202_assignment_1
 {
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MovieList LoadedMovies;
         
 
@@ -71,8 +74,9 @@ namespace D202_assignment_1
 
                 if (LoadedMovies != null)
                 {
-                        MovieBox.DataContext = LoadedMovies.Movies;
-                    
+                    foreach (Movie movie in LoadedMovies.Movies) {
+                        MovieBox.Items.Add(movie);
+                    }
                 }
             }
             catch (Exception)
