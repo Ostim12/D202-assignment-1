@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 //my own namespaces
 using MovieClasses;
@@ -16,22 +18,40 @@ using SaveJson;
 using search;
 using Sorting;
 using DataStructuers;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace D202_assignment_1
 {
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MovieList LoadedMovies;
-        
+
+        MovieList LoadedMovies;
+
+        MovieList UpdatedMovies;
+
+        SimpleHashTable<Movie> MoviesHashTable = new SimpleHashTable<Movie>();
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+
+        public void UpdateMovieBox(MovieList updataList)
+        {
+            if (updataList != null)
+            {
+                MovieBox.Items.Clear(); 
+                foreach (Movie movie in updataList.Movies)
+                {
+                    MovieBox.Items.Add(movie);
+                }
+            }
         }
 
         public T[] BubbleSort<T>(T[] values) where T : IComparable<T>
@@ -68,12 +88,7 @@ namespace D202_assignment_1
             try
             {
                 LoadedMovies = Load();
-
-                if (LoadedMovies != null)
-                {
-                        MovieBox.DataContext = LoadedMovies.Movies;
-                    
-                }
+                UpdateMovieBox(LoadedMovies);
             }
             catch (Exception)
             {
@@ -84,6 +99,32 @@ namespace D202_assignment_1
         private void SaveFileBtn_Click(object sender, RoutedEventArgs e)
         {
             Save(LoadedMovies);
+        }
+
+        private void BTNAddMovie_Click(object sender, RoutedEventArgs e)
+        {
+            Movie newMovie = new Movie();
+            newMovie.ID = InputMovieID.Text;
+            newMovie.Title = InputMovieTitle.Text;
+            newMovie.Director = InputMovieDirector.Text;
+            newMovie.Genre = InputMovieGenre.Text;
+            newMovie.ReleaseYear = InputMovieReleaseYear.Text;
+            newMovie.Availability = InputMovieAvailability.IsChecked;
+
+            UpdatedMovies = LoadedMovies;
+            UpdatedMovies.Add(newMovie);
+            UpdateMovieBox(UpdatedMovies);
+        }
+
+        private void BTNEditMovie_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBox.Show("file not saved");
+
         }
     }
 }
