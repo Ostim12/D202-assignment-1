@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D202_assignment_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1025" MinHeight="450" MinWidth="800">
+        Title="" Height="450" Width="1025" MinHeight="450" MinWidth="800" Closing="Window_Closing">
     <Grid Name="root" Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,9 +16,9 @@
                 <RowDefinition Height="22"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListView Name="MovieBox" Grid.Row="1" ItemsSource="{Binding Movies}">
-                <ListView.View>
-                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
+            <ListView Name="MovieBox" Grid.Row="1" ItemsSource="{Binding Movies}" SelectionMode="Single">
+                <ListView.View >
+                    <GridView AllowsColumnReorder="False" >
 
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ID}" Header="ID" Width="100"/>
 
@@ -30,7 +30,7 @@
                         
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ReleaseYear}" Header="Release Year" Width="100"/>
 
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Availability}" Header="Availability" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Availability}" Header="Available" Width="100"/>
 
                     </GridView>
                 </ListView.View>
@@ -106,11 +106,11 @@
                     <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" TextAlignment="Right" >Movie Release Year:</TextBlock>
                     <TextBox Name="InputMovieReleaseYear" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="9"/>
 
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="11" TextAlignment="Right" >Movie Availability:</TextBlock>
-                    <CheckBox Name="InputMovieAvailability" Grid.Column="3" Grid.Row="11"/>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="11" TextAlignment="Right" >Movie Available:</TextBlock>
+                    <CheckBox Name="InputMovieAvailability" Grid.Column="3" Grid.Row="11" IsChecked="True"/>
 
-                    <Button Name="BTNAddMovie"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="13">Add Movie</Button>
-                    <Button Name="BTNEditMovie" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="13" IsEnabled="False">Edit Movie</Button>
+                    <Button Name="BTNAddMovie"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="13" Click="BTNAddMovie_Click">Add Movie</Button>
+                    <Button Name="BTNEditMovie" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="13" IsEnabled="False" Click="BTNEditMovie_Click">Edit Movie</Button>
                     
                 </Grid>
             </TabItem>
