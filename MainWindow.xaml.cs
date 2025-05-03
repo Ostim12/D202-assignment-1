@@ -119,11 +119,23 @@ namespace D202_assignment_1
         private void BTNEditMovie_Click(object sender, RoutedEventArgs e)
         {
 
+
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBox.Show("file not saved");
+
+        }
+
+        private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BTNSortByID_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
