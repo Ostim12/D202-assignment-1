@@ -65,11 +65,11 @@ namespace D202_assignment_1
             return ListOfMovies;
         }
 
-        public T[] MergeSort<T>(T[] values) where T : IComparable<T>
+        public MovieList SortListOfMoviesByID(MovieList ListOfMovies)
         {
-            MergeSort<T> sorter = new MergeSort<T>();
-            sorter.Sort(values);
-            return values;
+            SortListOfMoviesByID soreter = new SortListOfMoviesByID();
+            ListOfMovies = soreter.SortByID(ListOfMovies);
+            return ListOfMovies;
         }
 
         public MovieList Load()
@@ -118,6 +118,8 @@ namespace D202_assignment_1
             newMovie.Availability = InputMovieAvailability.IsChecked;
 
             UpdatedMovies = ActiveMovieList;
+            if (UpdatedMovies == null)
+                UpdatedMovies = new MovieList();
             UpdatedMovies.Add(newMovie);
             ActiveMovieList = UpdatedMovies;
             UpdateMovieBox(ActiveMovieList);
@@ -138,14 +140,15 @@ namespace D202_assignment_1
 
         private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
         {
+
             ActiveMovieList = SortListOfMoviesByTitle(ActiveMovieList);
             UpdateMovieBox(ActiveMovieList);
-
         }
 
         private void BTNSortByID_Click(object sender, RoutedEventArgs e)
         {
-
+            ActiveMovieList = SortListOfMoviesByID(ActiveMovieList);
+            UpdateMovieBox(ActiveMovieList);
         }
     }
 }

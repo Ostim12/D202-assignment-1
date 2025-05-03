@@ -47,6 +47,12 @@ namespace MovieClasses
         public List<Movie> Movies
             { get; set; }
 
+        public MovieList()
+        {
+            Movies = new List<Movie>();
+
+        }
+
         public void Add(Movie movie)
         {
             Movies.Add(movie);

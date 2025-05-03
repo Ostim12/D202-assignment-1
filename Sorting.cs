@@ -5,74 +5,21 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Ink;
 
 namespace D202_assignment_1
 {
-    public class MergeSort<T> where T : IComparable<T>
-    {
-        public MergeSort() { }
-
-        // Array A[] has the items to sort; array B[] is a work array.
-        public void Sort(T[] A)
-        {
-            T[] B = new T[A.Length];
-            int n = A.Length;
-            CopyArray(A, 0, n, B);           // one time copy of A[] to B[]
-            TopDownSplitMerge(A, 0, n, B);   // sort data from B[] into A[]
-        }
-
-        // Split A[] into 2 runs, sort both runs into B[], merge both runs from B[] to A[]
-        // iBegin is inclusive; iEnd is exclusive (A[iEnd] is not in the set).
-       private void TopDownSplitMerge(T[] B,int iBegin,int iEnd, T[] A)
-        {
-            if (iEnd - iBegin <= 1)                     // if run size == 1
-                return;                                 //   consider it sorted
-                                                        // split the run longer than 1 item into halves
-            int iMiddle = (iEnd + iBegin) / 2;              // iMiddle = mid point
-                                                        // recursively sort both runs from array A[] into B[]
-            TopDownSplitMerge(A, iBegin, iMiddle, B);  // sort the left  run
-            TopDownSplitMerge(A, iMiddle, iEnd, B);  // sort the right run
-                                                     // merge the resulting runs from array B[] into A[]
-            TopDownMerge(B, iBegin, iMiddle, iEnd, A);
-        }
-
-        //  Left source half is A[ iBegin:iMiddle-1].
-        // Right source half is A[iMiddle:iEnd-1   ].
-        // Result is            B[ iBegin:iEnd-1   ].
-        private void TopDownMerge(T[] B,int iBegin,int iMiddle,int iEnd,T[] A)
-        {
-            int i = iBegin, j = iMiddle;
-
-            // While there are elements in the left or right runs...
-            for (int k = iBegin; k < iEnd; k++)
-            {
-                // If left run head exists and is <= existing right run head.
-                if (i < iMiddle && (j >= iEnd || A[i].CompareTo(A[j]) < 0))
-                {
-                    B[k] = A[i];
-                    i = i + 1;
-                }
-                else
-                {
-                    B[k] = A[j];
-                    j = j + 1;
-                }
-            }
-        }
-
-        void CopyArray(T[] A,int iBegin,int iEnd,T[] B)
-        {
-            for (int k = iBegin; k < iEnd; k++)
-                B[k] = A[k];
-        }
-    }
-
-
     public class SortListOfMoviesByTitle
     {
         private MovieList _ListOfMovies;
         private String[] _Titles;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ListOfMovies"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public MovieList SortByTitle(MovieList ListOfMovies) 
         {
             if (ListOfMovies == null) { throw new Exception(message: "Inputed list is empty"); }
@@ -91,7 +38,7 @@ namespace D202_assignment_1
 
         }
 
-        private MovieList Sort(string[] values, MovieList movielist)
+        private MovieList Sort(string[] values, MovieList movielist) // bubble sort
         {
             int n = values.Length;
             bool swapped;
@@ -125,5 +72,59 @@ namespace D202_assignment_1
         }
 
 
+    }
+
+    public class SortListOfMoviesByID
+    {
+        public MovieList SortByID(MovieList ListOfMovies) 
+        {
+            if (ListOfMovies == null) { throw new Exception(message: "Inputed list is empty"); }
+
+            string[] IDs = new string[ListOfMovies.Movies.Count];
+
+            for (int i = 0; i < IDs.Length; i++)
+            {
+                IDs[i] = ListOfMovies.Movies[i].ID;
+            }
+
+            ListOfMovies = Sort(IDs, ListOfMovies);
+
+            return ListOfMovies;
+        }
+
+        private MovieList Sort(string[] IDs, MovieList Movies) // selection sort
+        {
+            int n = IDs.Length;
+            for (int i = 0; i < n - 1; i++)
+            {
+
+                // Assume the current position holds
+                // the minimum element
+                int min_idx = i;
+
+                // Iterate through the unsorted portion
+                // to find the actual minimum
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (IDs[j].CompareTo(IDs[min_idx]) < 0)
+                    {
+
+                        // Update min_idx if a smaller element
+                        // is found
+                        min_idx = j;
+                    }
+                }
+
+                // Move minimum element to its
+                // correct position
+                string temp = IDs[i];
+                Movie tempMovie = Movies.Movies[i];
+                IDs[i] = IDs[min_idx];
+                Movies.Movies[i] = Movies.Movies[min_idx];
+                IDs[min_idx] = temp;
+                Movies.Movies[min_idx] = tempMovie;
+            }
+            return Movies;
+        }
     }
 }
