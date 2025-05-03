@@ -1,47 +1,13 @@
-﻿using System;
+﻿using MovieClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sorting
+namespace D202_assignment_1
 {
-    public class BubbleSort<T> where T : IComparable<T>
-    {
-        public BubbleSort() { }
-
-        public T[] Sort(T[] values)
-        {
-            int n = values.Length;
-            bool swapped;
-
-            do
-            {
-                swapped = false;
-                for (int i = 0; i < n - 1; i++)
-                {
-                    if (values[i].CompareTo(values[i + 1]) > 0) // Ascending order
-                    {
-                        Swap(values, i, i + 1);
-                        swapped = true;
-                    }
-                }
-                n--; // Largest element is correctly placed, reduce search space
-            }
-            while (swapped);
-
-            return values;
-        }
-
-        private void Swap(T[] values, int i, int j)
-        {
-            T temp = values[i];
-            values[i] = values[j];
-            values[j] = temp;
-        }
-    }
-
     public class MergeSort<T> where T : IComparable<T>
     {
         public MergeSort() { }
@@ -99,5 +65,65 @@ namespace Sorting
             for (int k = iBegin; k < iEnd; k++)
                 B[k] = A[k];
         }
+    }
+
+
+    public class SortListOfMoviesByTitle
+    {
+        private MovieList _ListOfMovies;
+        private String[] _Titles;
+
+        public MovieList SortByTitle(MovieList ListOfMovies) 
+        {
+            if (ListOfMovies == null) { throw new Exception(message: "Inputed list is empty"); }
+            _ListOfMovies = ListOfMovies;
+
+            _Titles = new string[ListOfMovies.Movies.Count];
+
+            for (int i = 0; i < _Titles.Length; i++)
+            {
+                _Titles[i] = ListOfMovies.Movies[i].Title;
+            }
+
+            _ListOfMovies = Sort(_Titles, _ListOfMovies);
+
+            return _ListOfMovies;
+
+        }
+
+        private MovieList Sort(string[] values, MovieList movielist)
+        {
+            int n = values.Length;
+            bool swapped;
+
+            do
+            {
+                swapped = false;
+                for (int i = 0; i < n - 1; i++)
+                {
+                    if (values[i].CompareTo(values[i + 1]) > 0) // Ascending order
+                    {
+                        Swap(values, movielist.Movies ,i, i + 1);
+                        swapped = true;
+                    }
+                }
+                n--; // Largest element is correctly placed, reduce search space
+            }
+            while (swapped);
+
+            return movielist;
+        }
+
+        private void Swap(string[] values, List<Movie> Movies, int i, int j)
+        {
+            string temp = values[i];
+            Movie tempMovie = Movies[i];
+            values[i] = values[j];
+            Movies[i] = Movies[j];
+            values[j] = temp;
+            Movies[j] = tempMovie;
+        }
+
+
     }
 }
