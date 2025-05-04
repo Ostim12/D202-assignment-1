@@ -16,7 +16,6 @@ using MovieClasses;
 using LoadJson;
 using SaveJson;
 using search;
-using Sorting;
 using DataStructuers;
 using System.Security.Cryptography.X509Certificates;
 
@@ -30,11 +29,16 @@ namespace D202_assignment_1
     public partial class MainWindow : Window
     {
 
-        MovieList LoadedMovies;
+        MovieList ActiveMovieList; // list that is currently actively being used
+
+        MovieList LoadedMovies; // 
 
         MovieList UpdatedMovies;
 
         SimpleHashTable<Movie> MoviesHashTable = new SimpleHashTable<Movie>();
+
+        SortListOfMoviesByTitle SortByTitle = new SortListOfMoviesByTitle();
+
 
         public MainWindow()
         {
@@ -54,17 +58,18 @@ namespace D202_assignment_1
             }
         }
 
-        public T[] BubbleSort<T>(T[] values) where T : IComparable<T>
+        public MovieList SortListOfMoviesByTitle(MovieList ListOfMovies)
         {
-            BubbleSort<T> sorter = new BubbleSort<T>();
-            return sorter.Sort(values); 
+            SortListOfMoviesByTitle soreter = new SortListOfMoviesByTitle();
+            ListOfMovies = soreter.SortByTitle(ListOfMovies);
+            return ListOfMovies;
         }
 
-        public T[] MergeSort<T>(T[] values) where T : IComparable<T>
+        public MovieList SortListOfMoviesByID(MovieList ListOfMovies)
         {
-            MergeSort<T> sorter = new MergeSort<T>();
-            sorter.Sort(values);
-            return values;
+            SortListOfMoviesByID soreter = new SortListOfMoviesByID();
+            ListOfMovies = soreter.SortByID(ListOfMovies);
+            return ListOfMovies;
         }
 
         public MovieList Load()
@@ -88,7 +93,8 @@ namespace D202_assignment_1
             try
             {
                 LoadedMovies = Load();
-                UpdateMovieBox(LoadedMovies);
+                ActiveMovieList = LoadedMovies;
+                UpdateMovieBox(ActiveMovieList);
             }
             catch (Exception)
             {
@@ -98,7 +104,7 @@ namespace D202_assignment_1
 
         private void SaveFileBtn_Click(object sender, RoutedEventArgs e)
         {
-            Save(LoadedMovies);
+            Save(ActiveMovieList);
         }
 
         private void BTNAddMovie_Click(object sender, RoutedEventArgs e)
@@ -111,13 +117,18 @@ namespace D202_assignment_1
             newMovie.ReleaseYear = InputMovieReleaseYear.Text;
             newMovie.Availability = InputMovieAvailability.IsChecked;
 
-            UpdatedMovies = LoadedMovies;
+            UpdatedMovies = ActiveMovieList;
+            if (UpdatedMovies == null)
+                UpdatedMovies = new MovieList();
             UpdatedMovies.Add(newMovie);
-            UpdateMovieBox(UpdatedMovies);
+            ActiveMovieList = UpdatedMovies;
+            UpdateMovieBox(ActiveMovieList);
         }
 
         private void BTNEditMovie_Click(object sender, RoutedEventArgs e)
         {
+
+
 
         }
 
@@ -125,6 +136,19 @@ namespace D202_assignment_1
         {
             MessageBox.Show("file not saved");
 
+        }
+
+        private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
+        {
+
+            ActiveMovieList = SortListOfMoviesByTitle(ActiveMovieList);
+            UpdateMovieBox(ActiveMovieList);
+        }
+
+        private void BTNSortByID_Click(object sender, RoutedEventArgs e)
+        {
+            ActiveMovieList = SortListOfMoviesByID(ActiveMovieList);
+            UpdateMovieBox(ActiveMovieList);
         }
     }
 }

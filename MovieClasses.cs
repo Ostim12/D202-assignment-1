@@ -8,6 +8,7 @@ using search;
 using DataStructuers;
 using D202_assignment_1;
 using System.Windows;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MovieClasses
 {
@@ -45,6 +46,12 @@ namespace MovieClasses
     {
         public List<Movie> Movies
             { get; set; }
+
+        public MovieList()
+        {
+            Movies = new List<Movie>();
+
+        }
 
         public void Add(Movie movie)
         {
