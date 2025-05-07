@@ -137,8 +137,8 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Name="SearchBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
                     <Button Name="SearchButton" Grid.Row="1" Grid.Column="4" Click="SearchButton_Click">🔍</Button>
-                    <RadioButton Name="SearchRBTitle" Grid.Row="3" Grid.Column="1" GroupName="SerchType" IsChecked="True">By Title</RadioButton>
-                    <RadioButton Name="SearchRBID" Grid.Row="3" Grid.Column="2" GroupName="SerchType" >By Movie ID</RadioButton>
+                    <RadioButton Name="SearchRBTitle" Grid.Row="3" Grid.Column="1" GroupName="SerchType" IsChecked="True" Click="SearchRB_Click">By Title</RadioButton>
+                    <RadioButton Name="SearchRBID" Grid.Row="3" Grid.Column="2" GroupName="SerchType" Click="SearchRB_Click">By Movie ID</RadioButton>
                     
                 </Grid>
             </TabItem>
@@ -163,8 +163,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="20"/>
                     </Grid.ColumnDefinitions>
-                    <Button Name="BTNSortByTitle" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Click="BTNSortByTitle_Click">Sort By Title</Button>
-                    <Button Name="BTNSortByID" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Click="BTNSortByID_Click">Sort By ID</Button>
+                    <Button Name="BTNSortByTitle" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Click="SearchRB_Click">Sort By Title</Button>
+                    <Button Name="BTNSortByID" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Click="SearchRB_Click">Sort By ID</Button>
                 </Grid>
             </TabItem>
         </TabControl>

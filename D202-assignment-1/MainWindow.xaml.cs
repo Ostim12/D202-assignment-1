@@ -35,9 +35,13 @@ namespace D202_assignment_1
 
         MovieList UpdatedMovies;
 
+        MovieList SearchResualtsList; // resualts from a search function
+
         SimpleHashTable<Movie> MoviesHashTable = new SimpleHashTable<Movie>();
 
         SortListOfMoviesByTitle SortByTitle = new SortListOfMoviesByTitle();
+
+        string Search_Type = "SearchRBTitle";
 
 
         public MainWindow()
@@ -58,13 +62,6 @@ namespace D202_assignment_1
             }
         }
 
-        public MovieList SortListOfMoviesByTitle(MovieList ListOfMovies)
-        {
-            SortListOfMoviesByTitle soreter = new SortListOfMoviesByTitle();
-            ListOfMovies = soreter.SortByTitle(ListOfMovies);
-            return ListOfMovies;
-        }
-
         public MovieList SortListOfMoviesByID(MovieList ListOfMovies)
         {
             SortListOfMoviesByID soreter = new SortListOfMoviesByID();
@@ -83,10 +80,6 @@ namespace D202_assignment_1
             Saver.Save(SaveList);
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void LoadFileBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -138,17 +131,28 @@ namespace D202_assignment_1
 
         }
 
-        private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
-        {
-
-            ActiveMovieList = SortListOfMoviesByTitle(ActiveMovieList);
-            UpdateMovieBox(ActiveMovieList);
-        }
-
         private void BTNSortByID_Click(object sender, RoutedEventArgs e)
         {
             ActiveMovieList = SortListOfMoviesByID(ActiveMovieList);
             UpdateMovieBox(ActiveMovieList);
+        }
+
+        private void SearchRB_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            Search_Type = rb.Name;
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActiveMovieList == null) 
+                { return; }
+            if (Search_Type == "SearchRBTitle")
+            {
+                MessageBox.Show("");
+                SearchResualtsList = SearchBYTitle.search(ActiveMovieList, SearchBox.Text);
+                UpdateMovieBox(SearchResualtsList);
+            }
         }
     }
 }
