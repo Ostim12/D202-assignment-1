@@ -21,9 +21,9 @@ namespace search
 
     }
 
-    public class BinarySearch<T> where T : IComparable<T>
+    public class BinarySearcher<T> where T : IComparable<T>
     {
-        public static int Search(T[] arr, T key)
+        public static int BinarySearch(T[] arr, T key)
         {
             int left = 0, right = arr.Length - 1;
             while (left <= right)
@@ -41,7 +41,7 @@ namespace search
 
     public class SearchBYTitle
     {
-        public static MovieList search(MovieList Searchlist, string ThingToFind)
+        public static (MovieList,int) search(MovieList Searchlist, string ThingToFind)
         {
             string[] titles = new string[Searchlist.Count];
             for (int i = 0; i < Searchlist.Count; i++)
@@ -57,8 +57,33 @@ namespace search
             }
             MovieList returnlist = new MovieList();
             returnlist.Add(Searchlist.Movies[index]);
-            return returnlist;
+            return (returnlist,index);
 
+        }
+    }
+    public class SearchByID
+    {
+        public static (MovieList,int) search(MovieList Searchlist, string ThingToFind)
+        {
+            if (!Searchlist.IsSortedByID)
+            {
+                MessageBox.Show("Please Sort Movies By ID Before Using This Search");
+                throw new Exception("List Not Sorted");
+            }
+            string[] IDs = new string[Searchlist.Count];
+            for (int i = 0; i < Searchlist.Count; i++)
+            {
+                IDs[i] = Searchlist.Movies[i].ID;
+            }
+            int index = BinarySearcher<string>.BinarySearch(IDs, ThingToFind);
+            if (index == -1)
+            {
+                MessageBox.Show("Could Not Find Movie");
+                throw new Exception("search not found");
+            }
+            MovieList returnlist = new MovieList();
+            returnlist.Add(Searchlist.Movies[index]);
+            return (returnlist,index);
         }
     }
 }

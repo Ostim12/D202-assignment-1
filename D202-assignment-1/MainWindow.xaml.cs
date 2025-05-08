@@ -36,6 +36,7 @@ namespace D202_assignment_1
         MovieList UpdatedMovies;
 
         MovieList SearchResualtsList; // resualts from a search function
+        int SearchResualtsIndexNum;
 
         SimpleHashTable<Movie> MoviesHashTable = new SimpleHashTable<Movie>();
 
@@ -60,13 +61,6 @@ namespace D202_assignment_1
                     MovieBox.Items.Add(movie);
                 }
             }
-        }
-
-        public MovieList SortListOfMoviesByID(MovieList ListOfMovies)
-        {
-            SortListOfMoviesByID soreter = new SortListOfMoviesByID();
-            ListOfMovies = soreter.SortByID(ListOfMovies);
-            return ListOfMovies;
         }
 
         public MovieList Load()
@@ -133,7 +127,13 @@ namespace D202_assignment_1
 
         private void BTNSortByID_Click(object sender, RoutedEventArgs e)
         {
-            ActiveMovieList = SortListOfMoviesByID(ActiveMovieList);
+            ActiveMovieList = SortListOfMoviesByID.SortByID(ActiveMovieList);
+            UpdateMovieBox(ActiveMovieList);
+        }
+
+        private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
+        {
+            ActiveMovieList = SortListOfMoviesByTitle.SortByTitle(ActiveMovieList);
             UpdateMovieBox(ActiveMovieList);
         }
 
@@ -149,10 +149,31 @@ namespace D202_assignment_1
                 { return; }
             if (Search_Type == "SearchRBTitle")
             {
-                MessageBox.Show("");
-                SearchResualtsList = SearchBYTitle.search(ActiveMovieList, SearchBox.Text);
-                UpdateMovieBox(SearchResualtsList);
+                try
+                {
+                    (SearchResualtsList , SearchResualtsIndexNum) = SearchBYTitle.search(ActiveMovieList, SearchBox.Text);
+                    UpdateMovieBox(SearchResualtsList);
+                }
+                catch (Exception E)
+                { Debug.WriteLine(E.Message); }
             }
+            if (Search_Type == "SearchRBID")
+            {
+                try
+                {
+                    (SearchResualtsList, SearchResualtsIndexNum) = SearchByID.search(ActiveMovieList, SearchBox.Text);
+                    UpdateMovieBox(SearchResualtsList);
+                }
+                catch (Exception E)
+                { Debug.WriteLine(E.Message); }
+        }
+        }
+
+        private void SearchClear_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateMovieBox(ActiveMovieList);
+            SearchResualtsList.Clear();
+            SearchResualtsIndexNum = -1;
         }
     }
 }

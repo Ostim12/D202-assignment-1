@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\D202_assignment_1\D202 assignment 1.csproj" />
+    <ProjectReference Include="..\D202-assignment-1\D202 assignment 1.csproj" />
   </ItemGroup>
 
   <ItemGroup>
