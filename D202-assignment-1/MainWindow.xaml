@@ -121,7 +121,7 @@
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="10"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -137,8 +137,9 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Name="SearchBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
                     <Button Name="SearchButton" Grid.Row="1" Grid.Column="4" Click="SearchButton_Click">🔍</Button>
-                    <RadioButton Name="SearchRBTitle" Grid.Row="3" Grid.Column="1" GroupName="SerchType" IsChecked="True">By Title</RadioButton>
-                    <RadioButton Name="SearchRBID" Grid.Row="3" Grid.Column="2" GroupName="SerchType" >By Movie ID</RadioButton>
+                    <RadioButton Name="SearchRBTitle" Grid.Row="3" Grid.Column="1" GroupName="SerchType" IsChecked="True" Click="SearchRB_Click">By Title</RadioButton>
+                    <RadioButton Name="SearchRBID" Grid.Row="3" Grid.Column="2" GroupName="SerchType" Click="SearchRB_Click">By Movie ID</RadioButton>
+                    <Button Name="SearchClear" Grid.Row="3" Grid.Column="4" Click="SearchClear_Click">Clear</Button>
                     
                 </Grid>
             </TabItem>

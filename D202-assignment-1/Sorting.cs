@@ -20,25 +20,26 @@ namespace D202_assignment_1
         /// <param name="ListOfMovies"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public MovieList SortByTitle(MovieList ListOfMovies) 
+        public static MovieList SortByTitle(MovieList ListOfMovies) 
         {
             if (ListOfMovies == null) { throw new Exception(message: "Inputed list is empty"); }
-            _ListOfMovies = ListOfMovies;
+            ListOfMovies = ListOfMovies;
 
-            _Titles = new string[ListOfMovies.Movies.Count];
+            string[] Titles = new string[ListOfMovies.Movies.Count];
 
-            for (int i = 0; i < _Titles.Length; i++)
+            for (int i = 0; i < Titles.Length; i++)
             {
-                _Titles[i] = ListOfMovies.Movies[i].Title;
+                Titles[i] = ListOfMovies.Movies[i].Title;
             }
 
-            _ListOfMovies = Sort(_Titles, _ListOfMovies);
+            ListOfMovies = Sort(Titles, ListOfMovies);
 
-            return _ListOfMovies;
+            ListOfMovies.IsSortedByID = false;
+            return ListOfMovies;
 
         }
 
-        private MovieList Sort(string[] values, MovieList movielist) // bubble sort
+        private static MovieList Sort(string[] values, MovieList movielist) // bubble sort
         {
             int n = values.Length;
             bool swapped;
@@ -61,7 +62,7 @@ namespace D202_assignment_1
             return movielist;
         }
 
-        private void Swap(string[] values, List<Movie> Movies, int i, int j)
+        private static void Swap(string[] values, List<Movie> Movies, int i, int j)
         {
             string temp = values[i];
             Movie tempMovie = Movies[i];
@@ -76,7 +77,7 @@ namespace D202_assignment_1
 
     public class SortListOfMoviesByID
     {
-        public MovieList SortByID(MovieList ListOfMovies) 
+        public static MovieList SortByID(MovieList ListOfMovies) 
         {
             if (ListOfMovies == null) { throw new Exception(message: "Inputed list is empty"); }
 
@@ -88,11 +89,11 @@ namespace D202_assignment_1
             }
 
             ListOfMovies = Sort(IDs, ListOfMovies);
-
+            ListOfMovies.IsSortedByID = true;
             return ListOfMovies;
         }
 
-        private MovieList Sort(string[] IDs, MovieList Movies) // selection sort
+        private static MovieList Sort(string[] IDs, MovieList Movies) // selection sort
         {
             int n = IDs.Length;
             for (int i = 0; i < n - 1; i++)

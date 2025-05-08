@@ -47,6 +47,10 @@ namespace MovieClasses
         public List<Movie> Movies
             { get; set; }
 
+        public bool IsSortedByID;
+
+        public int Count { get { return Movies.Count; } }
+
         public MovieList()
         {
             Movies = new List<Movie>();
@@ -56,7 +60,12 @@ namespace MovieClasses
         public void Add(Movie movie)
         {
             Movies.Add(movie);
+            IsSortedByID = false;
         }
+
+        public void Clear() { Movies.Clear(); IsSortedByID = false; }
+
+
     }
 
 

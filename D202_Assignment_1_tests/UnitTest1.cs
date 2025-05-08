@@ -19,14 +19,7 @@ namespace TestIng
                 testList.Add(testMovie1);
             }
 
-            MovieList SortListOfMoviesByID(MovieList ListOfMovies)
-            {
-                SortListOfMoviesByID soreter = new SortListOfMoviesByID();
-                ListOfMovies = soreter.SortByID(ListOfMovies);
-                return ListOfMovies;
-            }
-
-            SortListOfMoviesByID(testList);
+            SortListOfMoviesByID.SortByID(testList);
 
             for (int i = 0; i > 10; i++)
             {
@@ -48,14 +41,7 @@ namespace TestIng
                 testList.Add(testMovie1);
             }
 
-            MovieList SortListOfMoviesByTitle(MovieList ListOfMovies)
-            {
-                SortListOfMoviesByTitle soreter = new SortListOfMoviesByTitle();
-                ListOfMovies = soreter.SortByTitle(ListOfMovies);
-                return ListOfMovies;
-            }
-
-            SortListOfMoviesByTitle(testList);
+            SortListOfMoviesByTitle.SortByTitle(testList);
 
             for (int i = 0; i > 10; i++)
             {

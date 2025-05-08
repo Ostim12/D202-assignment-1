@@ -35,9 +35,14 @@ namespace D202_assignment_1
 
         MovieList UpdatedMovies;
 
+        MovieList SearchResualtsList; // resualts from a search function
+        int SearchResualtsIndexNum;
+
         SimpleHashTable<Movie> MoviesHashTable = new SimpleHashTable<Movie>();
 
         SortListOfMoviesByTitle SortByTitle = new SortListOfMoviesByTitle();
+
+        string Search_Type = "SearchRBTitle";
 
 
         public MainWindow()
@@ -58,20 +63,6 @@ namespace D202_assignment_1
             }
         }
 
-        public MovieList SortListOfMoviesByTitle(MovieList ListOfMovies)
-        {
-            SortListOfMoviesByTitle soreter = new SortListOfMoviesByTitle();
-            ListOfMovies = soreter.SortByTitle(ListOfMovies);
-            return ListOfMovies;
-        }
-
-        public MovieList SortListOfMoviesByID(MovieList ListOfMovies)
-        {
-            SortListOfMoviesByID soreter = new SortListOfMoviesByID();
-            ListOfMovies = soreter.SortByID(ListOfMovies);
-            return ListOfMovies;
-        }
-
         public MovieList Load()
         {
             LoadJson.LoadJson Loader = new LoadJson.LoadJson();
@@ -83,10 +74,6 @@ namespace D202_assignment_1
             Saver.Save(SaveList);
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void LoadFileBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -138,17 +125,55 @@ namespace D202_assignment_1
 
         }
 
-        private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
+        private void BTNSortByID_Click(object sender, RoutedEventArgs e)
         {
-
-            ActiveMovieList = SortListOfMoviesByTitle(ActiveMovieList);
+            ActiveMovieList = SortListOfMoviesByID.SortByID(ActiveMovieList);
             UpdateMovieBox(ActiveMovieList);
         }
 
-        private void BTNSortByID_Click(object sender, RoutedEventArgs e)
+        private void BTNSortByTitle_Click(object sender, RoutedEventArgs e)
         {
-            ActiveMovieList = SortListOfMoviesByID(ActiveMovieList);
+            ActiveMovieList = SortListOfMoviesByTitle.SortByTitle(ActiveMovieList);
             UpdateMovieBox(ActiveMovieList);
+        }
+
+        private void SearchRB_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            Search_Type = rb.Name;
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActiveMovieList == null) 
+                { return; }
+            if (Search_Type == "SearchRBTitle")
+            {
+                try
+                {
+                    (SearchResualtsList , SearchResualtsIndexNum) = SearchBYTitle.search(ActiveMovieList, SearchBox.Text);
+                    UpdateMovieBox(SearchResualtsList);
+                }
+                catch (Exception E)
+                { Debug.WriteLine(E.Message); }
+            }
+            if (Search_Type == "SearchRBID")
+            {
+                try
+                {
+                    (SearchResualtsList, SearchResualtsIndexNum) = SearchByID.search(ActiveMovieList, SearchBox.Text);
+                    UpdateMovieBox(SearchResualtsList);
+                }
+                catch (Exception E)
+                { Debug.WriteLine(E.Message); }
+        }
+        }
+
+        private void SearchClear_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateMovieBox(ActiveMovieList);
+            SearchResualtsList.Clear();
+            SearchResualtsIndexNum = -1;
         }
     }
 }
