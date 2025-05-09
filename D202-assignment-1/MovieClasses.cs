@@ -9,6 +9,7 @@ using DataStructuers;
 using D202_assignment_1;
 using System.Windows;
 using System.Security.Cryptography.X509Certificates;
+using System.Runtime.ExceptionServices;
 
 namespace MovieClasses
 {
@@ -59,13 +60,51 @@ namespace MovieClasses
 
         public void Add(Movie movie)
         {
+            if (IsIDAllreadyIn(movie.ID))
+            {
+                throw new Exception("movie with same ID already in list");
+            }
             Movies.Add(movie);
             IsSortedByID = false;
         }
 
+        /// <summary>
+        /// clears the movie list and sets sorted to false
+        /// </summary>
         public void Clear() { Movies.Clear(); IsSortedByID = false; }
 
+        /// <summary>
+        /// checks if an id string is in the movie list already
+        /// </summary>
+        private bool IsIDAllreadyIn(string id)
+        {
+            foreach (Movie movie in Movies)
+            {
+                if (movie.ID == id) return true;
+            }
+            return false;
+        }
 
+        /// <summary>
+        /// checks all ID in this movie list to see if there are any duplicate IDs
+        /// used when Loading from a file
+        /// </summary>
+        public bool HasDuplicateID()
+        {
+            string[] IDs = new string[Count];
+            for (int i = 0; i < IDs.Length; i++)
+            {
+                foreach (string id in IDs)
+                {
+                    if (id == Movies[i].ID)
+                    {
+                        return true;
+                    }
+                }
+                IDs[i] = Movies[i].ID;
+            }
+            return false;
+        }
     }
 
 

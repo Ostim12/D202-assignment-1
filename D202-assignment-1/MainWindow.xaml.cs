@@ -13,7 +13,6 @@ using System.Collections.ObjectModel;
 
 //my own namespaces
 using MovieClasses;
-using LoadJson;
 using SaveJson;
 using search;
 using DataStructuers;
@@ -63,11 +62,7 @@ namespace D202_assignment_1
             }
         }
 
-        public MovieList Load()
-        {
-            LoadJson.LoadJson Loader = new LoadJson.LoadJson();
-            return Loader.loadMovies();
-        }
+
 
         public void Save(MovieList SaveList){
             SaveJson.SaveJson Saver = new SaveJson.SaveJson();
@@ -79,13 +74,13 @@ namespace D202_assignment_1
         {
             try
             {
-                LoadedMovies = Load();
+                LoadedMovies = LoadJson.loadMovies();
                 ActiveMovieList = LoadedMovies;
                 UpdateMovieBox(ActiveMovieList);
             }
-            catch (Exception)
+            catch (Exception E)
             {
-                Debug.Print("load window closed");
+                MessageBox.Show(E.Message);
             }
         }
 
@@ -104,12 +99,18 @@ namespace D202_assignment_1
             newMovie.ReleaseYear = InputMovieReleaseYear.Text;
             newMovie.Availability = InputMovieAvailability.IsChecked;
 
-            UpdatedMovies = ActiveMovieList;
-            if (UpdatedMovies == null)
-                UpdatedMovies = new MovieList();
-            UpdatedMovies.Add(newMovie);
-            ActiveMovieList = UpdatedMovies;
-            UpdateMovieBox(ActiveMovieList);
+            try
+            {
+                UpdatedMovies = ActiveMovieList;
+                if (UpdatedMovies == null)
+                    UpdatedMovies = new MovieList();
+                UpdatedMovies.Add(newMovie);
+                ActiveMovieList = UpdatedMovies;
+                UpdateMovieBox(ActiveMovieList);
+            }catch (Exception E)
+            {
+                MessageBox.Show(E.Message);
+            }
         }
 
         private void BTNEditMovie_Click(object sender, RoutedEventArgs e)

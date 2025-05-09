@@ -5,11 +5,11 @@ using System.Text.Json;
 //my own classes
 using MovieClasses;
 
-namespace LoadJson
+namespace D202_assignment_1
 {
     public class LoadJson
     {
-        public MovieList loadMovies()
+        public static MovieList loadMovies()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Json files (*.json)|*.json";
@@ -17,8 +17,13 @@ namespace LoadJson
             {
                 string Json = File.ReadAllText(openFileDialog.FileName);
                 if (Json == null || Json == "")
-                { throw new Exception("big error"); }
+                { throw new Exception("Bad file : File is Blank"); }
                 MovieList? Source = JsonSerializer.Deserialize<MovieList>(Json);
+
+                if (Source.HasDuplicateID())
+                {
+                    throw new Exception("Bad file : File has a duplicate ID");
+                }
                 return Source;
             }
             throw new Exception("Window Closed");
