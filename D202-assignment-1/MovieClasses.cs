@@ -10,6 +10,8 @@ using D202_assignment_1;
 using System.Windows;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.ExceptionServices;
+using System.Collections;
+using System.Drawing;
 
 namespace MovieClasses
 {
@@ -20,16 +22,29 @@ namespace MovieClasses
         public string? Director { get; set; }
         public string? Genre { get; set; }
         public string? ReleaseYear { get; set; }
-        public bool? Availability { get; set; } //is available 
-        private DataStructuers.Queue<Customer> Waitlist {  get; set; }
+        public bool IsAvailable { get; set; } //is available 
+        public Waitlist Waitlist {  get; set; }
 
         public Movie() 
         {
-            Waitlist = new DataStructuers.Queue<Customer> (10); // max of 10 customers can be in the wait list at once
+            Waitlist = new Waitlist(10); // max of 10 customers can be in the wait list at once
         }
 
 
 
+    }
+
+    public class Waitlist : DataStructuers.Queue<string>
+    {
+        public bool IsFull { get { return (size == queue.Length); } }
+        public bool IsEmpty { get { return !(size >= 1); } }
+
+        public Waitlist(int capacity) : base(capacity)
+        {
+            queue = new string[capacity];
+            size = 0;
+        }
+        public string[] ShowAll() { return queue; }
     }
 
 
