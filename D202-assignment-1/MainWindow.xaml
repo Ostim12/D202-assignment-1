@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D202_assignment_1"
         mc:Ignorable="d"
-        Title="" Height="450" Width="1025" MinHeight="450" MinWidth="800" Closing="Window_Closing">
+        Title="" Height="450" Width="1025" MinHeight="450" MinWidth="800">
     <Grid Name="root" Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -36,8 +36,8 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <TabControl Grid.Column="1">
-            <TabItem Header="Load/save">
+        <TabControl Name="TabControler" Grid.Column="1">
+            <TabItem Name="TabLoadSave" Header="Load/save">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -62,7 +62,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Add/Edit">
+            <TabItem Name="TabAddEdit" Header="Add/Edit">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -115,7 +115,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Search">
+            <TabItem Name="TabSearch" Header="Search">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -144,7 +144,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Sort">
+            <TabItem Name="TabSort" Header="Sort">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -169,7 +169,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Borrow/Return" IsEnabled="False">
+            <TabItem Name="TabBorrowReturn" Header="Borrow/Return" IsEnabled="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -195,10 +195,10 @@
                     <ListBox Name="WaitlistBox" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" SelectionMode="Single"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Name:" HorizontalAlignment="Right"/>
-                    <TextBox Name="InputUsersName" Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="4"/>
+                    <TextBox Name="InputUsersName" Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="4" TextChanged="InputUsersName_TextChanged"/>
 
-                    <Button Name="BtnBorrowJoinWaitlist" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6">Borrow Movie</Button>
-                    <Button Name="BtnReturn" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="6">Return Movie</Button>
+                    <Button Name="BtnBorrowJoinWaitlist" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Click="BtnBorrowJoinWaitlist_Click">Borrow Movie</Button>
+                    <Button Name="BtnReturn" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="6" Click="BtnReturn_Click" IsEnabled="False">Return Movie</Button>
 
                 </Grid>
             </TabItem>

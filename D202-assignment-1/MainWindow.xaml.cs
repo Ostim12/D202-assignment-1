@@ -29,14 +29,16 @@ namespace D202_assignment_1
     {
 
         MovieList ActiveMovieList; // list that is currently actively being used
+        int SelectedMovieIndexNum = -1;
 
+        Waitlist SelectedMovieWaitlist;
 
         MovieList LoadedMovies; // 
 
         MovieList UpdatedMovies;
 
         MovieList SearchResualtsList; // resualts from a search function
-        int SearchResualtsIndexNum;
+        int SearchResualtsIndexNum = -1;
 
         SimpleHashTable<Movie> MoviesHashTable = new SimpleHashTable<Movie>();
 
@@ -44,10 +46,32 @@ namespace D202_assignment_1
 
         string Search_Type = "SearchRBTitle";
 
+        string CustomerName = "";
+
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void UpdateBtnBorrowJoinWaitlist()
+        {
+            SelectedMovieWaitlist = ActiveMovieList.Movies[SelectedMovieIndexNum].Waitlist;
+            if (SelectedMovieWaitlist.IsEmpty)
+            {
+                BtnBorrowJoinWaitlist.Content = "Borrow Movie";
+                BtnReturn.IsEnabled = false;
+                return;
+            }
+            if (SelectedMovieWaitlist.IsFull)
+            {
+                BtnBorrowJoinWaitlist.Content = "Join WaitList";
+                BtnBorrowJoinWaitlist.IsEnabled = false;
+                BtnReturn.IsEnabled = true;
+                return;
+            }
+            BtnBorrowJoinWaitlist.Content = "Join WaitList";
+            BtnReturn.IsEnabled = true;
         }
 
 
@@ -62,8 +86,6 @@ namespace D202_assignment_1
                 }
             }
         }
-
-
 
         public void Save(MovieList SaveList){
             SaveJson.SaveJson Saver = new SaveJson.SaveJson();
@@ -93,14 +115,22 @@ namespace D202_assignment_1
         private void BTNAddMovie_Click(object sender, RoutedEventArgs e)
         {
             Movie newMovie = new Movie();
+            if (InputMovieID.Text == "") { MessageBox.Show("id can't be blank"); return; }
             newMovie.ID = InputMovieID.Text;
             newMovie.Title = InputMovieTitle.Text;
             newMovie.Director = InputMovieDirector.Text;
             newMovie.Genre = InputMovieGenre.Text;
             newMovie.ReleaseYear = InputMovieReleaseYear.Text;
-            newMovie.Availability = InputMovieAvailability.IsChecked;
+            if (InputMovieAvailability.IsChecked == true) // IsChecked is nullable
+            {
+                newMovie.IsAvailable = true;
+            }
+            else 
+            { 
+                newMovie.IsAvailable = false; 
+            }
 
-            try
+                try
             {
                 UpdatedMovies = ActiveMovieList;
                 if (UpdatedMovies == null)
@@ -118,12 +148,6 @@ namespace D202_assignment_1
         {
 
 
-
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBox.Show("file not saved");
 
         }
 
@@ -180,7 +204,75 @@ namespace D202_assignment_1
 
         private void MovieBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (SearchResualtsIndexNum != -1)
+            {
+                if (MovieBox.SelectedIndex >= 0)
+                {
+                    SelectedMovieIndexNum = SearchResualtsIndexNum;
+                    UpdateBtnBorrowJoinWaitlist();
+                }
+                return; 
+            }
+            SelectedMovieIndexNum = MovieBox.SelectedIndex;
+            if (MovieBox.SelectedIndex == -1)
+            {
+                TabBorrowReturn.IsEnabled = false;
+                if (TabBorrowReturn.IsFocused)
+                {
+                    TabLoadSave.Focus();
+                    UpdateBtnBorrowJoinWaitlist();
+                }
+                return;
+            }
+            TabBorrowReturn.IsEnabled = true;
+            if (!TabAddEdit.IsFocused) 
+            {
+                TabBorrowReturn.Focus();
+            }
+            UpdateBtnBorrowJoinWaitlist();
+        }
 
+        private void BtnBorrowJoinWaitlist_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActiveMovieList.Movies[SelectedMovieIndexNum].IsAvailable)
+            {
+                ActiveMovieList.Movies[SelectedMovieIndexNum].IsAvailable = false;
+                UpdateBtnBorrowJoinWaitlist();
+                return;
+            }
+            if (CustomerName == "")
+            {
+                MessageBox.Show("Please Enter a name");
+                return;
+            }
+            if (SelectedMovieWaitlist.IsFull)
+            {
+                MessageBox.Show("Waitlist is full");
+                return;
+            }
+            SelectedMovieWaitlist.Enqueue(CustomerName);
+            UpdateBtnBorrowJoinWaitlist();
+        }
+
+        private void BtnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActiveMovieList.Movies[SelectedMovieIndexNum].IsAvailable)
+            {
+                return;
+            }
+            if (SelectedMovieWaitlist.IsEmpty)
+            {
+                ActiveMovieList.Movies[SelectedMovieIndexNum].IsAvailable = true;
+                return;
+            }
+            string NextPerson = SelectedMovieWaitlist.Dequeue();
+            MessageBox.Show($"Movie is now borowed out to : {NextPerson}");
+
+        }
+
+        private void InputUsersName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CustomerName = InputUsersName.Text;
         }
     }
 }

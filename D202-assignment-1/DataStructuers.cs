@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace DataStructuers
 {
-    class Queue<T>
+    public class Queue<T>
     {
 
-        private T[] queue { get; set; }
-        private int size { get; set; }
+        internal T[] queue { get; set; }
+        internal int size { get; set; }
 
         public Queue(int capacity)
         {
