@@ -16,7 +16,7 @@
                 <RowDefinition Height="22"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListView Name="MovieBox" Grid.Row="1" ItemsSource="{Binding Movies}" SelectionMode="Single">
+            <ListView Name="MovieBox" Grid.Row="1" ItemsSource="{Binding Movies}" SelectionMode="Single" SelectionChanged="MovieBox_SelectionChanged">
                 <ListView.View >
                     <GridView AllowsColumnReorder="False" >
 
@@ -166,6 +166,40 @@
                     </Grid.ColumnDefinitions>
                     <Button Name="BTNSortByTitle" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Click="BTNSortByTitle_Click">Sort By Title</Button>
                     <Button Name="BTNSortByID" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Click="BTNSortByID_Click">Sort By ID</Button>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Borrow/Return" IsEnabled="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="14"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Waitlist"/>
+                    <ListBox Name="WaitlistBox" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" SelectionMode="Single"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Name:" HorizontalAlignment="Right"/>
+                    <TextBox Name="InputUsersName" Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="4"/>
+
+                    <Button Name="BtnBorrowJoinWaitlist" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6">Borrow Movie</Button>
+                    <Button Name="BtnReturn" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="6">Return Movie</Button>
+
                 </Grid>
             </TabItem>
         </TabControl>

@@ -30,6 +30,7 @@ namespace D202_assignment_1
 
         MovieList ActiveMovieList; // list that is currently actively being used
 
+
         MovieList LoadedMovies; // 
 
         MovieList UpdatedMovies;
@@ -175,6 +176,11 @@ namespace D202_assignment_1
             UpdateMovieBox(ActiveMovieList);
             SearchResualtsList.Clear();
             SearchResualtsIndexNum = -1;
+        }
+
+        private void MovieBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
